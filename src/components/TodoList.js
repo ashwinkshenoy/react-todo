@@ -31,6 +31,7 @@ function TodoList(props) {
   }
 
   const renderList = (todoList = props.todoList) => {
+    todoList.sort((a,b) => b.id - a.id);
     return (
       todoList.map((todo) => (
         <TodoItem key={todo.id} todo={todo} markComplete={props.markComplete} delTodo={props.delTodo} />

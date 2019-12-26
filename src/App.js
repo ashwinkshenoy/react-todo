@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Components
 import AddTodo from './components/AddTodo'
@@ -25,19 +25,27 @@ function App() {
         todo.completed = !todo.completed;
       return todo;
     })
-    setTodoList(todos)
+    setTodoList(todos);
   }
 
   const delTodo = (todoId) => {
-    console.log(todoId);
     const todos = todoList.filter(todo =>  todo.id !== todoId);
-    setTodoList(todos)
+    setTodoList(todos);
   }
+
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem('todoList'));
+    if(storedTodos) setTodoList(storedTodos);
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+  }, [todoList]);
 
   return (
     <div className="App">
       <AddTodo addTodo={addTodo.bind(this)} />
-      <TodoList todoList={todoList} markComplete={markComplete.bind(this)} delTodo={delTodo.bind(this)}/>
+      <TodoList todoList={todoList} markComplete={markComplete} delTodo={delTodo}/>
     </div>
   );
 }

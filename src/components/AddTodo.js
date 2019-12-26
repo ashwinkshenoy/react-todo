@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
 
-function AddTodo(props) {
+function AddTodo({ addTodo }) {
 
   const [todo, setTodo] = useState('');
 
   const handleChange = (e) => {
+    if(!e.target.value) return;
     setTodo(e.target.value)
   }
 
   const onSubmit = (e) => {
     e.preventDefault();
-    props.addTodo(todo);
-    setTodo('')
+    if(!todo) return;
+    addTodo(todo);
+    setTodo('');
   }
 
   return (
@@ -23,6 +25,7 @@ function AddTodo(props) {
           value={todo}
           onChange={(e) => handleChange(e)}
         />
+        <button type="submit">Add</button>
       </form>
     </div>
   )

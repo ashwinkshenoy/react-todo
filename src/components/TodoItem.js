@@ -1,13 +1,22 @@
 import React from 'react';
 
-function TodoItem(props) {
-  const { id, text, completed } = props.todo;
+function TodoItem({todo, markComplete, delTodo}) {
+  const { id, text, completed } = todo;
+
+  const handleTodoChange = () => {
+    markComplete(id)
+  }
+
+  const deleteTodo = () => {
+    delTodo(id);
+  }
+
   return (
     <div>
       <p>
-        <input type="checkbox" onChange={props.markComplete.bind(this, id)} checked={ completed ? 'checked': '' }/>
+        <input type="checkbox" onChange={handleTodoChange} checked={ completed ? 'checked': '' }/>
           {text}
-        <button onClick={props.delTodo.bind(this, id)}>
+        <button onClick={deleteTodo}>
           Remove
         </button>
       </p>
