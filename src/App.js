@@ -1,42 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 // Components
 import AddTodo from './components/AddTodo'
 import TodoList from './components/TodoList'
 
+// Actions
+import { syncStorage } from './actions/index.js';
+
 import './App.css';
 
 function App() {
 
-  const [todoList, setTodoList] = useState([])
-
-  const addTodo = (todo) => {
-    const todoItem = {
-      text: todo,
-      id: +new Date(),
-      completed: false
-    }
-    setTodoList([...todoList, todoItem])
-  }
-
-  const markComplete = (todoId) => {
-    const todos = todoList.map(todo => {
-      if(todo.id === todoId)
-        todo.completed = !todo.completed;
-      return todo;
-    })
-    setTodoList(todos);
-  }
-
-  const delTodo = (todoId) => {
-    const todos = todoList.filter(todo =>  todo.id !== todoId);
-    setTodoList(todos);
-  }
+  const todoList = useSelector(state => state);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const storedTodos = JSON.parse(localStorage.getItem('todoList'));
-    if(storedTodos) setTodoList(storedTodos);
-  }, [])
+    const storedTodos = JSON.parse(localStorage.getItem('todoList'));  
+    if(storedTodos) dispatch(syncStorage(storedTodos));    
+  }, [dispatch])
 
   useEffect(() => {
     localStorage.setItem('todoList', JSON.stringify(todoList));
@@ -44,8 +26,9 @@ function App() {
 
   return (
     <div className="App">
-      <AddTodo addTodo={addTodo.bind(this)} />
-      <TodoList todoList={todoList} markComplete={markComplete} delTodo={delTodo}/>
+      <h1>A Simple Todo App</h1>
+      <AddTodo />
+      <TodoList />
     </div>
   );
 }

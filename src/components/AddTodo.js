@@ -1,8 +1,16 @@
 import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
 
-function AddTodo({ addTodo }) {
+// Actions
+import { addTodos } from '../actions/index.js';
+
+import './AddTodo.css';
+
+
+function AddTodo() {
 
   const [todo, setTodo] = useState('');
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     if(!e.target.value) return;
@@ -12,12 +20,12 @@ function AddTodo({ addTodo }) {
   const onSubmit = (e) => {
     e.preventDefault();
     if(!todo) return;
-    addTodo(todo);
+    dispatch(addTodos(todo));
     setTodo('');
   }
 
   return (
-    <div>
+    <div className="todo-form">
       <form onSubmit={(e) => onSubmit(e)} >
         <input 
           type="text" 
