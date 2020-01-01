@@ -47,7 +47,7 @@ function TodoList() {
       return (
         <div className="todos">
           {todos.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} />
+            <TodoItem key={ todo.id } todo={ todo } />
           ))}
         </div>
       )
@@ -57,14 +57,14 @@ function TodoList() {
   return (
     <>
       <div className="todo-buttons">
-        <button onClick={() => disableFilter()}>All</button>
-        <button onClick={() => toggleFilter(true)}>Completed</button>
-        <button onClick={() => toggleFilter(false)}>Not Completed</button>
+        <button onClick={ () => disableFilter() }>All</button>
+        <button onClick={ () => toggleFilter(true) }>Completed</button>
+        <button onClick={ () => toggleFilter(false) }>Not Completed</button>
       </div>
 
       <div className="todo-status-text">
-        {todoList.filter(todo => todo.completed).length} / {todoList.length} tasks completed 
-        <span>{todoList.filter(todo => todo.completed).length === todoList.length ? '🎉' : ''}</span>
+        { todoList.filter(todo => todo.completed).length } / { todoList.length } tasks completed 
+        <span>{ todoList.filter(todo => todo.completed).length === todoList.length ? '🎉' : '' }</span>
       </div>
 
       <div className="todo-list">
@@ -87,7 +87,7 @@ function TodoList() {
           </defs>
         </svg>
 
-        {showCompleted ? completed() : showNotCompleted ? notCompleted() : renderList()}
+        { showCompleted ? completed() : showNotCompleted ? notCompleted() : renderList() }
       </div>
     </>
   );

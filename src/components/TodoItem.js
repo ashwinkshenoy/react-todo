@@ -23,8 +23,8 @@ function TodoItem({todo}) {
 
   return (
     <>
-      <label className="todo" htmlFor={id}>
-        <input className="todo__state" type="checkbox" onChange={ handleTodoChange } checked={ completed ? 'checked': '' } id={id} />
+      <label className="todo" htmlFor={ id }>
+        <input className="todo__state" type="checkbox" onChange={ handleTodoChange } checked={ completed ? 'checked': '' } id={ id } />
         
         <svg xmlns="http://www.w3.org/2000/svg" xlinkHref="http://www.w3.org/1999/xlink" viewBox="0 0 200 25" className="todo__icon">
           <use xlinkHref="#todo__line" className="todo__line"></use>
@@ -35,7 +35,7 @@ function TodoItem({todo}) {
 
         <div className="todo__text">{ text }</div>
         <button onClick={ deleteTodo } className="remove-button">
-          <img src={trash} alt="remove" />
+          <img src={ trash } alt="remove" />
         </button>
         
       </label>

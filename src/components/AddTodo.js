@@ -13,7 +13,6 @@ function AddTodo() {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    if(!e.target.value) return;
     setTodo(e.target.value)
   }
 
